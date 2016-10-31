@@ -81,8 +81,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-
+import os
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+	os.path.join(os.path.dirname(__file__), '../static/').replace('\\','/'),
+)
 TEMPLATE_DIRS={
     '/opt/wxData/django/agt/login/templates'
     '/opt/wxData/django/agt/main/templates'
