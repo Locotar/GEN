@@ -34,8 +34,8 @@ def login(req):
             if user:
                 # write to session
                 req.session['username'] = username
-                return render_to_response('env.html',{'username':username})
-                # response = HttpResponseRedirect('/main/')
+                # return render_to_response('env.html',{'username':username})
+                return HttpResponseRedirect('/env/')
                 # response.set_cookie('username',username,3600)
                 # return response
             else:

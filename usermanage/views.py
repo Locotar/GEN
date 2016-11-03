@@ -4,14 +4,15 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.template import RequestContext
 from login.models import User
 import time
-from login.views import login
+# from login.views import login
 
 def usermanage(request):
     username = request.session.get('username')
     if username != None:
         return render(request ,'usermanage.html' , {'username': username})
     else:
-        return login(request)
+        # return login(request)
+        return HttpResponseRedirect('/login/')
 
 class UserForm(forms.Form):
     username = forms.CharField(label='user:',max_length=100)
