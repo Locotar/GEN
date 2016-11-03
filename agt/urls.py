@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^task/', include('task.urls')),
     url(r'^queue/', include('queue.urls')),
     url(r'^usermanage/', include('usermanage.urls')),
-    # url(r'^usermanage/regist/', include('usermanage.views')),
 
     url(r'^admin/', include(admin.site.urls)),
     # css js image  -> folder

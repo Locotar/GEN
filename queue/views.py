@@ -1,7 +1,10 @@
 from django.shortcuts import render , render_to_response
-
-# Create your views here.
 from django.http import HttpResponse
+from login.views import login
 
 def queue(request):
-    return render(request ,'queue.html')
+    username = request.session.get('username')
+    if username != None:
+        return render(request ,'queue.html' , {'username' : username})
+    else:
+        return login(request)

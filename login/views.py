@@ -32,10 +32,12 @@ def login(req):
             password = uf.cleaned_data['password']
             user = User.objects.filter(username__exact = username,password__exact = password)
             if user:
-                # return render_to_response('success.html',{'username':username})
-                response = HttpResponseRedirect('/main/')
-                response.set_cookie('username',username,3600)
-                return response
+                # write to session
+                req.session['username'] = username
+                return render_to_response('env.html',{'username':username})
+                # response = HttpResponseRedirect('/main/')
+                # response.set_cookie('username',username,3600)
+                # return response
             else:
                 return HttpResponseRedirect('/login/')
     else:

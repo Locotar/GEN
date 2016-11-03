@@ -3,9 +3,15 @@ from django import forms
 from django.http import HttpResponse , HttpResponseRedirect
 from django.template import RequestContext
 from login.models import User
+import time
+from login.views import login
 
 def usermanage(request):
-    return render(request ,'usermanage.html')
+    username = request.session.get('username')
+    if username != None:
+        return render(request ,'usermanage.html' , {'username': username})
+    else:
+        return login(request)
 
 class UserForm(forms.Form):
     username = forms.CharField(label='user:',max_length=100)
@@ -20,7 +26,9 @@ def regist(request):
             password = uf.cleaned_data['password']
             # add to db
             User.objects.create(username= username,password=password)
-            return HttpResponse('regist success!!')
+            # return HttpResponse('success!')
+            time.sleep(3)
+            return render_to_response('env.html',{'username':username})
     else:
         uf = UserForm()
     return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
