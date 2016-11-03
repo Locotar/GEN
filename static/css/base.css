@@ -55,7 +55,7 @@ address{ background-color:#FFF; padding:20px 0px; text-align:center; font-style:
 #Head #UserList a:hover{background-color:#1e628f;}
 
 #Navi{height:100px;overflow:hidden;}
-#Navi li{width:12.5%;text-align:center;float:left;}
+#Navi li{width:20%;text-align:center;float:left;}
 #Navi li a{display:block;width:100%;text-align:center;padding:17px 0px 20px 0px;color:#FFF;text-decoration:none;font-size:14px;background-color:#3085be;}
 #Navi li.active a,
 #Navi li a:hover{background-color:#1e628f;}
