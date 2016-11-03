@@ -22,28 +22,17 @@
 <body>
 <!-- wrap_left -->
 <div class="wrap_left" id="frmTitle" name="fmTitle">
+
 <!-- Logo -->
 <div id="Logo"><span>GEN</span></div>
 <!-- /Logo -->
 
 <!-- menu_list -->
-<script>
-$(function() {
-    $(".menu_list dd");
-    $(".menu_list dt").click(function(){
-        $(this).toggleClass("open").next().slideToggle("fast");
-    });
-});
-</script>
 <div class="menu_list">
 <dl>
-    <dt>
-        <span>一级分类名称</span>
-    </dt>
-    <dd>
-        <a href="" title="二级分类">二级分类</a>
+    <dd style="display: block;">
+        <a href="" title="二级分类">{{username}}</a>
     </dd>
-
 </dl>
 </div>
 <!-- /menu_list -->
