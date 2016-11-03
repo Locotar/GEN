@@ -24,26 +24,14 @@
 	<h1 title="GEN管理后台">GEN管理平台</h1>
 
 	<script type="text/javascript">
-		/*function displaySubMenu(id) {
-			id.style.display = "block";
-		}
-		function hideSubMenu(id) {
-			id.style.display = "none";
-		}*/
-		document.onclick = function(){
-      	if(document.activeElement.id=='test'){
-         	UserList.style.display ="block";
-         	//控制别的div的也可以在此延伸
-     	}
-     	if(document.activeElement.id!='test'){
-         	UserList.style.display ="none";
-         	//控制别的div的也可以在此延伸
-     	}
+		function showmenu(id){id.style.visibility = "visible";}
+		function hidmenu(){UserList.style.visibility = "hidden";}
+		document.onclick = hidmenu;
 	</script>
 
 	<!-- 这里是右上角的名字 -->
 	<div id="test" class="user">
-		<a href="javascript:displaySubMenu(UserList)">{{username}}</a>
+		<a href="javascript:showmenu(UserList)">{{username}}</a>
 		<div id="UserList">
 			<a href="">修改</a>
 			<a href="">注销</a>
