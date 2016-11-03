@@ -73,8 +73,8 @@ address{ background-color:#FFF; padding:20px 0px; text-align:center; font-style:
 //.menu_list dd:hover span{background:url(../images/common/ico07.png) no-repeat right center;}
 //.menu_list dd.open span{background:url(../images/common/ico06.png) no-repeat right center !important;}
 
-.menu_list dd{font-size:16px;display:none; position:relative;}
-.menu_list dd a{padding:10px 0px 10px 70px;color:#FFF;display:block;text-decoration:none;background:#0d81cc url(../images/common/ico02.png) no-repeat 2.5em 0.8em;}
+.menu_list dd{font-size:18px;display:none; position:relative;}
+.menu_list dd a{padding:10px 0px 10px 85px;color:#FFF;display:block;text-decoration:none;background:#0d81cc url(../images/common/ico02.png) no-repeat 2.5em 0.8em;}
 .menu_list dd a.active,
 .menu_list dd a:hover{background-color:#0a67a3;}
 
