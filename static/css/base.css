@@ -34,6 +34,12 @@ h4{}
 
 #Wrap{}
 address{ background-color:#FFF; padding:20px 0px; text-align:center; font-style:normal; line-height:1.8em;}
+footer {clear:both;
+    height:10%;
+    border-top:5px;
+    background:#CAC3B5;
+    line-height: 36px;
+    vertical-align: middle;}
 
 .wrap_left{width:230px;background-color:#1e628f; overflow: auto;}
 .wrap_right{ text-align:left;overflow: auto;height:100%;}
