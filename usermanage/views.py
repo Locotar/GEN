@@ -8,8 +8,8 @@ import time
 
 def usermanage(request):
     username = request.session.get('username')
-    if username != None:
-        return render(request ,'usermanage.html' , {'username': username})
+    if username :
+        return render(request ,'usermanage.html' , {'username': username,'active': 'user'})
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')

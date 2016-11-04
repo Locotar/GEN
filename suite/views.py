@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 def suite(request):
     username = request.session.get('username')
-    if username != None:
-        return render(request ,'suite.html' , {'username': username})
+    if username:
+        return render(request ,'suite.html' , {'username': username , 'active': 'suite'})
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')

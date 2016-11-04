@@ -30,9 +30,38 @@
 <!-- menu_list -->
 <div class="menu_list">
 <dl>
+    {% ifequal active 'env' %}
     <dd style="display: block;">
-        <a href="" title="二级分类">{{username}}</a>
+        <a href="" title="二级分类">添加节点</a>
     </dd>
+    <dd style="display: block;">
+        <a href="" title="二级分类">删除节点</a>
+    </dd>
+    <dd style="display: block;">
+        <a href="" title="二级分类">节点分组</a>
+    </dd>
+    <dd style="display: block;">
+        <a href="" title="二级分类">节点展示</a>
+    </dd>
+    {% endifequal %}
+
+    {% ifequal active 'suite' %}
+    <dd style="display: block;">
+        <a href="" title="二级分类">上传用例</a>
+    </dd>
+    {% endifequal %}
+
+    {% ifequal active 'task' %}
+    <dd style="display: block;">
+        <a href="" title="二级分类">创建任务</a>
+    </dd>
+    {% endifequal %}
+
+    {% ifequal active 'user' %}
+    <dd style="display: block;">
+        <a href="" title="二级分类">增加用户</a>
+    </dd>
+    {% endifequal %}
 </dl>
 </div>
 <!-- /menu_list -->

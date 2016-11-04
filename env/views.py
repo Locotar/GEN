@@ -4,8 +4,8 @@ from django.http import HttpResponse , HttpResponseRedirect
 
 def env(request):
     username = request.session.get('username')
-    if username != None:
-        return render( request ,'env.html' , {'username': username})
+    if username:
+        return render( request ,'env.html' , {'username': username,'active': 'env'})
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
