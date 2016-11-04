@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', include('login.urls')),
     # user
     url(r'^login/', include('login.urls')),
-    url(r'^main/', include('main.urls')),
+    # url(r'^main/', include('main.urls')),
 
     url(r'^env/', include('env.urls')),
     url(r'^suite/', include('suite.urls')),
