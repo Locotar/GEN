@@ -1,22 +1,37 @@
 var status = 1;
 var Menus = new DvMenuCls;
 
-document.onclick=Menus.Clear;
-function switchSysBar(){
-	var switchPoint=document.getElementById("switchPoint");
-	var frmTitle=document.getElementById("frmTitle");
-     if (1 == window.status){
-		  window.status = 0;
-		  //alert(switchPoint);
 
-          switchPoint.style.backgroundImage = 'url(images/common/left.gif)';
-          frmTitle.style.display="none"
-     }
-     else{
-		  window.status = 1;
-          switchPoint.style.backgroundImage = 'url(images/common/right.gif)'; 
-          frmTitle.style.display=""
-     }
+function showenv(envId){
+    // get value from sql;
+    $("#openModal").show();
+}
+
+document.onclick=Menus.Clear;
+function showmenu(id){id.style.visibility = "visible";}
+function hidmenu(){UserList.style.visibility = "hidden";}
+function switchSysBar(){
+    var switchPoint=document.getElementById("switchPoint");
+	var frmTitle=document.getElementById("frmTitle");
+	var table=document.getElementById("showinfo");
+    if (1 == window.status){
+        window.status = 0;
+        //alert(table);
+
+        //switchPoint.style.backgroundImage = 'url(images/common/left.gif)';
+        frmTitle.style.display="none"
+        if ( null != table) {
+            table.style.width="98%"
+        }
+    }
+    else{
+        window.status = 1;
+        //switchPoint.style.backgroundImage = 'url(images/common/right.gif)';
+        frmTitle.style.display=""
+        if ( null != table) {
+            table.style.width="84%"
+        }
+    }
 }
 
 function DvMenuCls(){

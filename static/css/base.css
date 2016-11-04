@@ -71,14 +71,6 @@ footer {clear:both;
 
 
 .menu_list{width:100%;clear:both;background-color:#1e628f;}
-//.menu_list dd{font-size:20px;position:relative;cursor:pointer;background:#32323A url(../images/common/ico01.png) no-repeat 0.8em 0.9em;border-bottom:#3B3B43 solid 1px;padding:15px 20px 15px 50px;color:#95A0AA; }
-//.menu_list dd.open,
-//.menu_list dd:hover{background:#106ca8 url(../images/common/ico05.png) no-repeat 0.8em 0.9em;border-bottom:#459ed9 solid 1px;color:#FFF;}
-//.menu_list dd span{display:block;padding-right:10px;background:url(../images/common/ico03.png) no-repeat right center;}
-//.menu_list dd.active span,
-//.menu_list dd:hover span{background:url(../images/common/ico07.png) no-repeat right center;}
-//.menu_list dd.open span{background:url(../images/common/ico06.png) no-repeat right center !important;}
-
 .menu_list dd{font-size:18px;display:none; position:relative;}
 .menu_list dd a{padding:10px 0px 10px 85px;color:#FFF;display:block;text-decoration:none;background:#0d81cc url(../images/common/ico02.png) no-repeat 2.5em 0.8em;}
 .menu_list dd a.active,
@@ -93,7 +85,7 @@ footer {clear:both;
 #MainForm h2{ background-color:#f9f9f9; font-size:16px; padding:15px 20px 12px 20px; color:#333; font-weight:normal; border-bottom:#e8e8e8 solid 1px;}
 
 .form_boxA{}
-.form_boxA table{width:100%;}
+.form_boxA table{width:84%;}
 .form_boxA th{border-bottom:#e3e3e3 solid 2px; text-align:center; font-size:14px; padding:10px 0px;}
 .form_boxA td{border-bottom:#e3e3e3 solid 1px; text-align:center; font-size:14px; padding:8px 15px;}
 .form_boxA a{ color:#3085be; text-decoration:none;}
@@ -164,3 +156,55 @@ footer {clear:both;
 #Popup #BtmBtn{ padding:15px 20px;border-top:#e3e3e3 solid 1px;}
 #SubPopup{ padding:20px;}
 #maskTitle{ background-color:#e5e5e5 !important; background-image:none !important;}
+
+
+  .modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 250ms ease-in;
+	-moz-transition: opacity 250ms ease-in;
+	transition: opacity 250ms ease-in;
+	pointer-events: none;
+}
+
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 400px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -o-linear-gradient(bottom, rgb(245,245,245) 25%, rgb(232,232,232) 63%);
+background: -moz-linear-gradient(bottom, rgb(245,245,245) 25%, rgb(232,232,232) 63%);
+background: -webkit-linear-gradient(bottom, rgb(245,245,245) 25%, rgb(232,232,232) 63%);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: 10px;
+	text-align: center;
+	top: 10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+}
+
+.close:hover { background: #57a2d1; }
