@@ -4,7 +4,7 @@ var Menus = new DvMenuCls;
 
 function showenv(envId){
     // get value from sql;
-    $("#openModal").show();
+    window.location.href="#openModal"
 }
 
 document.onclick=Menus.Clear;

@@ -4,6 +4,7 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.template import RequestContext
 from login.models import User
 import time
+import sqlite3
 # from login.views import login
 
 def usermanage(request):
@@ -25,6 +26,12 @@ def regist(request):
             # get values
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
+            # try:
+                # connect to db.sqlite3
+                # conn = sqlite3.connect('db.sqlite3')
+                # cursor = conn.execute("SELECT * from login_user")
+            # except:
+            #     return render_to_response('regist.html', {'uf': uf}, context_instance=RequestContext(request))
             # add to db
             User.objects.create(username= username,password=password)
             # return HttpResponse('success!')
