@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^queue/', include('queue.urls')),
     url(r'^usermanage/', include('usermanage.urls')),
 
+    url(r'^getEnvFromDB/', include('getEnvFromDB.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
     # css js image  -> folder
     url( r'^static/(?P<path>.*)$', 'django.views.static.serve',{ 'document_root': settings.STATIC_URL }),  

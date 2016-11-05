@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'task',
     'queue',
     'usermanage',
+    'getEnvFromDB',
 )
 
 MIDDLEWARE_CLASSES = (
