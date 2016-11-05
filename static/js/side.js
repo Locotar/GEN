@@ -1,48 +1,6 @@
 var status = 1;
 var Menus = new DvMenuCls;
 
-// do something at load
-$(function(){
-    var mydate = new Date();
-    var timeNow=mydate.toLocaleString();
-    $("#showCurrentTime").html(timeNow)
-});
-
-// show jump div
-function showenvInfo(envId){
-    // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
-    text = text + "<p>" + envId + "</p></div>"
-    $("#openModal").html( text )
-    window.location.href="#openModal"
-}
-
-function deleteEnv(envId ){
-    // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
-    text = text + "<p> 确定要删除么？</p></div>"
-    $("#openModal").html( text )
-    window.location.href="#openModal"
-}
-
-function RstartEnv(envId ){
-    // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定重启</h2>"
-    text = text + "<p> 确定要重启么？</p></div>"
-    $("#openModal").html( text )
-    window.location.href="#openModal"
-}
-
-$("#buttonEnv").click(function() {
-    var mydate = new Date();
-    var timeNow=mydate.toLocaleString();
-    $("#showCurrentTime").html(timeNow)
-    // ajax
-    var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
-    $("#showinfo").html(htmlobj.responseText);
-});
-
-
 document.onclick=Menus.Clear;
 function showmenu(id){id.style.visibility = "visible";}
 function hidmenu(){UserList.style.visibility = "hidden";}
@@ -153,3 +111,104 @@ function getleftbar(obj){
 			}
 	}
 }
+
+
+
+
+
+
+
+// ----------------- body ----------------
+
+// ++++ ENV
+// do something at load
+$(function(){
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+});
+
+// show jump div
+function showenvInfo(envId){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
+    text = text + "<p>" + envId + "</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
+function deleteEnv(envId ){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
+    text = text + "<p> 确定要删除么？</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
+function RstartEnv(envId ){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定重启</h2>"
+    text = text + "<p> 确定要重启么？</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
+// click the flash Env button
+$("#buttonEnv").click(function() {
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+    // ajax
+    var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
+    $("#showinfo").html(htmlobj.responseText);
+});
+
+
+
+
+// ++++ User
+// click the flash buttonUser button
+$("#buttonUser").click(function() {
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+    // ajax
+    var htmlobj=$.ajax({url:"/usermanage/ShowUser/",async:false});
+    $("#showUserinfo").html(htmlobj.responseText);
+});
+
+// show jump div
+function showUserInfo(envId){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
+    text = text + "<p>" + envId + "</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
+function deleteUser(envId ){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
+    text = text + "<p> 确定要删除么？</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
+
+function AddUser(){
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
+    text = text + "<form method = 'post' enctype=\"multipart/form-data\">"
+    text = text + "<br/><tr> <td>用户名：</td>  <td><input  type=\"text\" name=\"name\" /></td>"
+    text = text + "</tr><br/><br/>"
+
+    text = text + "<tr> <td>密码：</td>  <td><input  type=\"text\" name=\"pass\" /></td>"
+    text = text + "</tr><br/><br/>"
+//    text = text +
+    text = text + "<input type=\"submit\" value = \"ok\" />"
+    text = text + "</form>"
+
+    text = text + "</div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+

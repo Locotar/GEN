@@ -10,20 +10,6 @@ class UserForm(forms.Form):
     username = forms.CharField(label='user:',max_length=16)
     password = forms.CharField(label='pass:',widget=forms.PasswordInput())
 
-def regist(req):
-   if req.method == 'POST':
-       uf = UserForm(req.POST)
-       if uf.is_valid():
-           # get values
-           username = uf.cleaned_data['username']
-           password = uf.cleaned_data['password']
-           # add to db
-           User.objects.create(username= username,password=password)
-           return HttpResponse('regist success!!')
-   else:
-       uf = UserForm()
-   return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(req))
-
 def login(req):
     if req.method == 'POST':
         uf = UserForm(req.POST)
@@ -48,7 +34,8 @@ def index(req):
 
 
 def logout(req):
-    response = HttpResponse('logout !!')
+    response = HttpResponse('logout success!!')
     # clean username
-    response.delete_cookie('username')
+    del req.session['username']
+
     return response

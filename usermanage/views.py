@@ -4,13 +4,19 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.template import RequestContext
 from login.models import User
 import time
-import sqlite3
+from main.SQlitDB import connect_db
 # from login.views import login
 
 def usermanage(request):
     username = request.session.get('username')
     if username :
-        return render(request ,'usermanage.html' , {'username': username,'active': 'user'})
+        conn = connect_db()
+        value = conn.selectfromtable('login_user' )
+        if value:
+            return render(request ,'usermanage.html' , {'username': username,'active': 'user' ,'Userdict': value})
+        else:
+            # show error msg
+            return HttpResponseRedirect('/login/')
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
@@ -40,3 +46,33 @@ def regist(request):
     else:
         uf = UserForm()
     return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
+
+# button click
+def ShowUser(request):
+    username = request.session.get('username')
+    if username:
+        conn = connect_db()
+        value = conn.selectfromtable('login_user' )
+        if value:
+            return render( request ,'User_table.html' , {'Userdict':value})
+        else:
+            # show error msg
+            return HttpResponseRedirect('/login/')
+    else:
+        # return login(request)
+        return HttpResponseRedirect('/login/')
+
+
+def AddUser(request):
+    username = request.session.get('username')
+    if username:
+        conn = connect_db()
+        value = conn.selectfromtable('login_user' )
+        if value:
+            return render( request ,'User_table.html' , {'Userdict':value})
+        else:
+            # show error msg
+            return HttpResponseRedirect('/login/')
+    else:
+        # return login(request)
+        return HttpResponseRedirect('/login/')
