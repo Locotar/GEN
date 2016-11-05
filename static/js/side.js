@@ -198,13 +198,13 @@ function deleteUser(envId ){
 function AddUser(){
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
     text = text + "<form method = 'post' enctype=\"multipart/form-data\">"
-    text = text + "<br/><tr> <td>用户名：</td>  <td><input  type=\"text\" name=\"name\" /></td>"
-    text = text + "</tr><br/><br/>"
+    text = text + "<br/><li> &nbsp&nbsp&nbsp<td>用户名：</td>  <td><input  type=\"text\" name=\"name\" /></td>"
+    text = text + "</li><br/><br/>"
 
-    text = text + "<tr> <td>密码：</td>  <td><input  type=\"text\" name=\"pass\" /></td>"
-    text = text + "</tr><br/><br/>"
+    text = text + "<li> &nbsp&nbsp&nbsp<td>密码：</td> &nbsp&nbsp&nbsp <td><input  type=\"text\" name=\"pass\" /></td>"
+    text = text + "</li><br/><br/>"
 //    text = text +
-    text = text + "<input type=\"submit\" value = \"ok\" />"
+    text = text + "&nbsp&nbsp&nbsp<input type=\"submit\" value = \"ok\" />"
     text = text + "</form>"
 
     text = text + "</div>"

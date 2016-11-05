@@ -25,27 +25,7 @@ class UserForm(forms.Form):
     username = forms.CharField(label='user:',max_length=100)
     password = forms.CharField(label='pass:',widget=forms.PasswordInput())
 
-def regist(request):
-    if request.method == 'POST':
-        uf = UserForm(request.POST)
-        if uf.is_valid():
-            # get values
-            username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
-            # try:
-                # connect to db.sqlite3
-                # conn = sqlite3.connect('db.sqlite3')
-                # cursor = conn.execute("SELECT * from login_user")
-            # except:
-            #     return render_to_response('regist.html', {'uf': uf}, context_instance=RequestContext(request))
-            # add to db
-            User.objects.create(username= username,password=password)
-            # return HttpResponse('success!')
-            time.sleep(3)
-            return render_to_response('env.html',{'username':username})
-    else:
-        uf = UserForm()
-    return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
+
 
 # button click
 def ShowUser(request):
@@ -57,7 +37,7 @@ def ShowUser(request):
             return render( request ,'User_table.html' , {'Userdict':value})
         else:
             # show error msg
-            return HttpResponseRedirect('/login/')
+            return Http404()
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')

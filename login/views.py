@@ -27,6 +27,26 @@ def login(req):
         uf = UserForm()
     return render_to_response('login.html',{'uf':uf} , context_instance=RequestContext(req))
 
+def regist(request):
+    if request.method == 'POST':
+        uf = UserForm(request.POST)
+        if uf.is_valid():
+            # get values
+            username = uf.cleaned_data['username']
+            password = uf.cleaned_data['password']
+            # wheter username exist!
+            user = User.objects.filter(username__exact=username, password__exact=password)
+            if user:
+                return HttpResponse('Fail , username exit!')
+            else:
+                # add to db
+                User.objects.create(username= username,password=password)
+                # return HttpResponse('success!')
+                # time.sleep(3)
+                return render_to_response('/login/' ,{'uf':uf})
+    else:
+        uf = UserForm()
+    return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
 
 def index(req):
     username = req.COOKIES.get('username','')
