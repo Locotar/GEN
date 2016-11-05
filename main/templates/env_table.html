@@ -4,7 +4,7 @@
 
 <table cellpadding="0" cellspacing="0" id="showinfo">
     <tr>
-        <th>{{username}}</th>
+        <th>序号</th>
         <th>节点名称</th>
         <th>ip地址</th>
         <th>添加时间</th>
@@ -12,34 +12,37 @@
         <th>节点状态</th>
         <th>操作节点</th>
     </tr>
+    {% for id , name , pass in dict %}
     <tr>
-        <td>1</td>
-        <td>阿里云</td>
-        <td>120.26.130.113</td>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{pass}}</td>
         <td>20161104</td>
         <td>否</td>
         <td>running</td>
-        <td><a href="#openModal">查看</a> | <a href="#">删除</a> | <a href="#">重启</a></td>
+        <td><a href="javascript:showenvInfo({{id}})">查看</a> | <a href="javascript:deleteEnv({{id}})">删除</a> | <a href="javascript:RstartEnv({{id}})">重启</a></td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>Agttest001</td>
-        <td>192.168.10.201</td>
-        <td>20161104</td>
-        <td>否</td>
-        <td>running</td>
-        <td><a href="javascript:showenv(2)" >查看</a> | <a href="#">删除</a> | <a href="#">重启</a></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Agttest002</td>
-        <td>192.168.10.202</td>
-        <td>20161104</td>
-        <td>否</td>
-        <td>running</td>
-        <td><a href="javascript:void(0)" onclick="showenv(3)">查看</a> | <a href="#">删除</a> | <a href="#">重启</a></td>
-    </tr>
+    {% endfor %}
+    <!--<tr>-->
+        <!--<td>2</td>-->
+        <!--<td>Agttest001</td>-->
+        <!--<td>192.168.10.201</td>-->
+        <!--<td>20161104</td>-->
+        <!--<td>否</td>-->
+        <!--<td>running</td>-->
+        <!--<td><a href="javascript:showenv(2)" >查看</a> | <a href="#">删除</a> | <a href="#">重启</a></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td>3</td>-->
+        <!--<td>Agttest002</td>-->
+        <!--<td>192.168.10.202</td>-->
+        <!--<td>20161104</td>-->
+        <!--<td>否</td>-->
+        <!--<td>running</td>-->
+        <!--<td><a href="javascript:void(0)" onclick="showenv(3)">查看</a> | <a href="#">删除</a> | <a href="#">重启</a></td>-->
+    <!--</tr>-->
 </table>
+
 </head>
 <body>
 

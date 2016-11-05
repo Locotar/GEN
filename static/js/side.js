@@ -1,25 +1,44 @@
 var status = 1;
 var Menus = new DvMenuCls;
 
+// do something at load
+$(function(){
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+});
+
 // show jump div
-function showenv(envId){
+function showenvInfo(envId){
     // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
+    text = text + "<p>" + envId + "</p></div>"
+    $("#openModal").html( text )
     window.location.href="#openModal"
 }
 
-
-function reloadenv(){
-    // get value from sql
-    var insertText = "<table cellpadding='0' cellspacing='0' id='showinfo'> ";
-    insertText = insertText + "<tr><th>序号</th><th>节点名称</th><th>ip地址</th><th>添加时间</th><th>是否被占用</th><th>节点状态</th><th>操作节点</th></tr>";
-    insertText = insertText + "<tr><td>1</td><td>阿里云</td><td>120.26.130.113</td><td>20161104</td>";
-    insertText = insertText + "<td>否</td><td>running</td><td><a href='#openModal'>查看</a> | <a href='#'>删除</a> | <a href='#'>重启</a></td></tr></table>";
-    $("#showinfo").html(insertText);
+function deleteEnv(envId ){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
+    text = text + "<p> 确定要删除么？</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
 }
+
+function RstartEnv(envId ){
+    // get value from sql;
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定重启</h2>"
+    text = text + "<p> 确定要重启么？</p></div>"
+    $("#openModal").html( text )
+    window.location.href="#openModal"
+}
+
 $("#buttonEnv").click(function() {
-    // ajax test        ,data: {'username': 'xug','active': 'env'}
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+    // ajax
     var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
-//    alert(htmlobj)
     $("#showinfo").html(htmlobj.responseText);
 });
 
