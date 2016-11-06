@@ -11,13 +11,13 @@
         <th>管理员么</th>
         <th>操作节点</th>
     </tr>
-    {% for id , name , pass in Userdict %}
+    {% for id , name , pass , is_Admin , join_Time in Userdict %}
     <tr>
         <td>{{id}}</td>
         <td>{{name}}</td>
         <td>{{pass}}</td>
-        <td>20161104</td>
-        <td>否</td>
+        <td>{{join_Time}}</td>
+        <td>{{is_Admin}}</td>
         <td><a href="javascript:showUserInfo({{id}})">查看</a> | <a href="javascript:deleteUser({{id}})">删除</a></td>
     </tr>
     {% endfor %}
