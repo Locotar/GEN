@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     url(r'^usermanage/',views.usermanage,name = 'usermanage'),
     url(r'^ShowUser/$',views.ShowUser,name = 'ShowUser'),
     url(r'^AddUser/$',views.AddUser,name = 'AddUser'),
-    # url(r'^DelUser/$',views.DelUser,name = 'DelUser'),
+    url(r'^DelUser/$',views.DelUser,name = 'DelUser'),
 )

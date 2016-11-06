@@ -126,6 +126,11 @@ $(function(){
     var mydate = new Date();
     var timeNow=mydate.toLocaleString();
     $("#showCurrentTime").html(timeNow)
+
+    // -----------------login
+    if(document.getElementById("loginForm")){
+    alert('Regist Success.')
+}
 });
 
 // show jump div
@@ -178,22 +183,30 @@ $("#buttonUser").click(function() {
 });
 
 // show jump div
-function showUserInfo(envId){
+function showUserInfo(userId){
     // get value from sql;
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
-    text = text + "<p>" + envId + "</p></div>"
+    text = text + "<p>" + userId + "</p></div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
 }
 
-function deleteUser(envId ){
+function deleteUser(userId ){
     // get value from sql;
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
-    text = text + "<p> 确定要删除么？</p></div>"
+    text = text + "<br/><p> 确定要删除么？</p><br/><br/>"
+    text = text + "<button onclick=\"deleteUserSure(" + userId + ")\"> ok</button></div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
 }
 
+function deleteUserSure(userId){
+    alert(userId)
+    window.location.href="#close"
+    urltmp = "/usermanage/DelUser/?userid=" + userId
+    $.ajax({url:urltmp,async:false});
+//    $("#buttonUser").click()
+}
 
 function AddUser(){
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"

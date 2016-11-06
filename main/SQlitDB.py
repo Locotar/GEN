@@ -14,3 +14,10 @@ class connect_db:
             return cursor
         except:
             return None
+
+    def deletefromtable(self, table, keyid = None):
+        try:
+            cursor = self.conn.execute("DELETE FROM " + table + " WHERE ID=" + keyid )
+            return cursor
+        except:
+            return None

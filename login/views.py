@@ -10,7 +10,7 @@ class UserForm(forms.Form):
     username = forms.CharField(label='user:',max_length=16)
     password = forms.CharField(label='pass:',widget=forms.PasswordInput())
 
-def login(req):
+def login(req ):
     if req.method == 'POST':
         uf = UserForm(req.POST)
         if uf.is_valid():
@@ -25,7 +25,13 @@ def login(req):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserForm()
-    return render_to_response('login.html',{'uf':uf} , context_instance=RequestContext(req))
+    regist =req.GET.get('regist')
+
+    if regist:
+        # return render_to_response('login.html', context_instance=RequestContext(req))
+        return render_to_response('login.html',{'uf':uf , 'regist':'success'} , context_instance=RequestContext(req))
+    else:
+        return render_to_response('login.html',{'uf':uf} , context_instance=RequestContext(req))
 
 def regist(request):
     if request.method == 'POST':
@@ -43,7 +49,8 @@ def regist(request):
                 User.objects.create(username= username,password=password)
                 # return HttpResponse('success!')
                 # time.sleep(3)
-                return render_to_response('/login/' ,{'uf':uf})
+                # return HttpResponseRedirect('/login/' ,{'uf':uf , 'regist':'success'})
+                return HttpResponseRedirect('/login/?regist=success' )
     else:
         uf = UserForm()
     return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
