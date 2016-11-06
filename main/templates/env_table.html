@@ -12,14 +12,14 @@
         <th>节点状态</th>
         <th>操作节点</th>
     </tr>
-    {% for id , name , pass in dict %}
+    {% for id,name,ip,jointime,lock,status in dict %}
     <tr>
         <td>{{id}}</td>
         <td>{{name}}</td>
-        <td>{{pass}}</td>
-        <td>20161104</td>
-        <td>否</td>
-        <td>running</td>
+        <td>{{ip}}</td>
+        <td>{{jointime}}</td>
+        <td>{{lock}}</td>
+        <td>{{status}}</td>
         <td><a href="javascript:showenvInfo({{id}})">查看</a> | <a href="javascript:deleteEnv({{id}})">删除</a> | <a href="javascript:RstartEnv({{id}})">重启</a></td>
     </tr>
     {% endfor %}

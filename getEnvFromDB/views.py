@@ -7,7 +7,7 @@ def getEnvFromDB(request):
     username = request.session.get('username')
     if username:
         conn = connect_db()
-        value = conn.selectfromtable('login_user')
+        value = conn.selectfromtable('env', 'id,name,ip,jointime,lock,status')
         if value:
             return render( request ,'env_table.html', {'dict':value})
         else:
@@ -17,16 +17,3 @@ def getEnvFromDB(request):
         # return login(request)
         return HttpResponseRedirect('/login/')
 
-def AddEnv(request,value):
-    username = request.session.get('username')
-    if username:
-        # conn = connect_db()
-        # value = conn.selectfromtable('login_user' )
-        if value:
-            return render( request ,'env_table.html' , {'dict':value})
-        else:
-            # show error msg
-            return HttpResponseRedirect('/login/')
-    else:
-        # return login(request)
-        return HttpResponseRedirect('/login/')

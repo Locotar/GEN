@@ -22,3 +22,14 @@ class connect_db:
             return cursor
         except:
             return None
+
+    def Addtotable(self, table, value):
+        try:
+            # raise Exception("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
+            #                   + table + ") + 1," + value + ")")
+            self.conn.execute("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
+                              + table + ") + 1," + value + ")")
+            self.conn.commit()
+            return 1
+        except:
+            return None

@@ -7,7 +7,7 @@ def env(request ):
     username = request.session.get('username')
     if username:
         conn = connect_db()
-        value = conn.selectfromtable('login_user' )
+        value = conn.selectfromtable('env', 'id,name,ip,jointime,lock,status')
         if value:
             return render( request ,'env.html' , {'username': username,'active': 'env' , 'dict':value})
         else:

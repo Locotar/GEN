@@ -25,8 +25,8 @@ def login(req ):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserForm()
-    regist =req.GET.get('regist')
 
+    regist =req.GET.get('regist')
     if regist:
         # return render_to_response('login.html', context_instance=RequestContext(req))
         return render_to_response('login.html',{'uf':uf , 'regist':'success'} , context_instance=RequestContext(req))
