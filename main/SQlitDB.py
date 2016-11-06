@@ -18,6 +18,7 @@ class connect_db:
     def deletefromtable(self, table, keyid = None):
         try:
             cursor = self.conn.execute("DELETE FROM " + table + " WHERE ID=" + keyid )
+            self.conn.commit()
             return cursor
         except:
             return None

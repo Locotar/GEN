@@ -201,11 +201,12 @@ function deleteUser(userId ){
 }
 
 function deleteUserSure(userId){
-    alert(userId)
+//    alert(userId)
     window.location.href="#close"
     urltmp = "/usermanage/DelUser/?userid=" + userId
     $.ajax({url:urltmp,async:false});
-//    $("#buttonUser").click()
+    $("#buttonUser").click()
+    $("#buttonUser").click()
 }
 
 function AddUser(){
