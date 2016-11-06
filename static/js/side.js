@@ -183,9 +183,9 @@ $("#buttonUser").click(function() {
 });
 
 // show jump div
-function showUserInfo(userId){
+function ModUserInfo(userId){
     // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>节点信息</h2>"
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>用户信息</h2>"
     text = text + "<p>" + userId + "</p></div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
@@ -208,17 +208,39 @@ function deleteUserSure(userId){
     $("#buttonUser").click()
     $("#buttonUser").click()
 }
-
+$(function(){
+$(".select").each(function(){
+var s=$(this);
+var z=parseInt(s.css("z-index"));
+var dt=$(this).children("dt");
+var dd=$(this).children("dd");
+var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+dt.click(function(){dd.is(":hidden")?_show():_hide();});
+dd.find("a").click(function(){dt.html($(this).html());_hide();});
+$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
 function AddUser(){
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
     text = text + "<form method = 'post' enctype=\"multipart/form-data\">"
-    text = text + "<br/><li> &nbsp&nbsp&nbsp<td>用户名：</td>  <td><input  type=\"text\" name=\"name\" /></td>"
-    text = text + "</li><br/><br/>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input id=\"username\" name=\"username\" type=\"text\"/></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp<input id=\"pass\" name=\"password\" type=\"password\"/></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select><option value=\"N\">否</option>"
+    text = text + "<option value=\"Y\">是</option></select></div>"
 
-    text = text + "<li> &nbsp&nbsp&nbsp<td>密码：</td> &nbsp&nbsp&nbsp <td><input  type=\"text\" name=\"pass\" /></td>"
-    text = text + "</li><br/><br/>"
-//    text = text +
-    text = text + "&nbsp&nbsp&nbsp<input type=\"submit\" value = \"ok\" />"
+
+
+    text = text + "<br/><br/><div><hr/></div>"
+    text = text + "<div><button type=\"submit\">提交</button>&nbsp&nbsp&nbsp<button id=\"reset\" type=\"button\">重置</button></div>"
+//    text = text + ""
+
+//    text = text + "<br/><li> &nbsp&nbsp&nbsp<td>用户名：</td>  <td><input  type=\"text\" name=\"name\" /></td>"
+//    text = text + "</li><br/><br/>"
+//
+//    text = text + "<li> &nbsp&nbsp&nbsp<td>密码：</td> &nbsp&nbsp&nbsp <td><input  type=\"text\" name=\"pass\" /></td>"
+//    text = text + "</li><br/><br/>"
+
+
+//    text = text + "<br/>&nbsp&nbsp&nbsp<input type=\"submit\" onClick=\"myFunction()\" value = \"ok\" />"
     text = text + "</form>"
 
     text = text + "</div>"
