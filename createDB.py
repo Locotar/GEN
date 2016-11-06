@@ -21,8 +21,17 @@ conn.execute('''CREATE TABLE ENV
        JOBID           INT,
        JOBNAME         TEXT
        );''')
-conn.commit()
 print "ENV Table created successfully";
+
+conn.execute('''CREATE TABLE JOB
+       (JOBID INT PRIMARY KEY     NOT NULL,
+       JOBNAME            TEXT    NOT NULL,
+       STARTTIME          TEXT,
+       ENDTIME            TEXT,
+       STATUS             TEXT
+       );''')
+print "JOB Table created successfully";
+conn.commit()
 
 
 conn.close()
