@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django import forms
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 # from django.template import Re/q/uestContext  HttpResponse ,, render_to_response
 from login.models import User
 import time
@@ -91,3 +91,31 @@ def DelUser(request):
             return HttpResponseRedirect('/login/')
     else:
         return HttpResponseRedirect('/login/')
+
+def CheckUser(request):
+    username = request.GET.get('username')
+    userexist = User.objects.filter(username__exact=username)
+    if userexist:
+        result = {'result':'fail'}
+        return JsonResponse(result)
+    else:
+        result = {'result':'success'}
+        return JsonResponse(result)
+
+def ModUser(request):
+    userid = request.GET.get('userid')
+    password = request.GET.get('password')
+    admin = request.GET.get('admin')
+    conn = connect_db()
+    value = {'password': password, 'admin': admin}
+    re = conn.ModUser('login_user', value, userid)
+    if re:
+        result = {'result': 'success'}
+        return JsonResponse(result)
+    else:
+        result = {'result': 'fail'}
+        return JsonResponse(result)
+
+
+
+

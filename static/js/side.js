@@ -181,12 +181,48 @@ $("#buttonUser").click(function() {
     $("#showUserinfo").html(htmlobj.responseText);
 });
 
-// show jump div
-function ModUserInfo(userId){
+
+
+// Modify user
+
+function subModUser(userId){
+    var password = $("#password").val()
+    var admin = $("select[name='admin']").val()
+    // ajax
+    if ('6' > password.length){
+        $("#CheckReP").text('* Num of pass less then 6')
+    }
+    else{
+        urltmp = "/usermanage/ModUser/?userid=" + userId + "&password=" + password + "&admin=" + admin
+        $.getJSON(urltmp, function(ret){
+            if ('success' == ret['result']){
+                window.location.href="#close"
+                $("#buttonUser").click()
+            }
+            else{
+                $("#CheckReU").text('* Modify user info fail.')
+                $("#CheckReP").text('* Maybe DB is dead.')
+            }
+        })
+    }
+}
+function ModUserInfo(userId, userName){
     // get value from sql;
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>修改信息</h2>"
-    // load user info
-    text = text + "<p>" + userId + "</p></div>"
+    text = text + "<form id='adduserform' method = 'post' enctype=\"multipart/form-data\">"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp"
+    text = text + "<input id='username' name=\"username\" type=\"text\" disabled='true' value='" + userName + "' maxlength='16'/>"
+    text = text + "&nbsp&nbsp<span id='CheckReU' style='color: red;'></span></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp"
+    text = text + "<input id='password' name=\"password\" type=\"password\" maxlength='16'/>"
+    text = text + "&nbsp&nbsp<span id='CheckReP' style='color: red;'></span></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select name='admin' type=\"text\"><option value=\"N\">N</option>"
+    text = text + "<option value=\"Y\">Y</option></select></div>"
+    text = text + "<br/><br/><div><hr/></div>"
+//onClick=\"subAddUser()\"
+    text = text + "<div><button type=\"button\" onClick=\"subModUser('" + userId + "')\" >提交</button>&nbsp&nbsp&nbsp<button  type=\"button\" onClick=\"CleanAddUser()\">重置</button></div>"
+    text = text + "</form>"
+    text = text + "</div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
 }
@@ -205,33 +241,54 @@ function deleteUserSure(userId){
     urltmp = "/usermanage/DelUser/?userid=" + userId
     $.ajax({url:urltmp,async:false});
     $("#buttonUser").click()
-    $("#buttonUser").click()
 }
 
 
 //---add user---
+
+// submit add user form
 function subAddUser(){
-	$('#adduserform').submit()
+    // check user whether exist
+    var username = $("#username").val()
+    var password = $("#password").val()
+    if ('0' == username.length){
+        $("#CheckReU").text('* Empty!')
+    }
+    else{
+        urltmp = "/usermanage/CheckUser/?username=" + username
+        $.getJSON(urltmp, function(ret){
+            if ('success' == ret['result']){
+                if ('6' > password.length){
+                    $("#CheckReP").text('* Num of pass less then 6')
+                }
+                else{
+                    $('#adduserform').submit()
+                }
+            }
+            else{
+                $("#CheckReU").text('already exit!')
+            }
+        })
+    }
 }
 function CleanAddUser() {
-	$("#username").value=""
-	$("#password").value=""
+	$('#adduserform')[0].reset();
+	$("#CheckReP").empty();
+	$("#CheckReU").empty();
 }
-
-function OnInput(event){
-	alert('judge whether the user exist!')
-}
-
 function AddUser(){
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
     text = text + "<form id='adduserform' method = 'post' enctype=\"multipart/form-data\" action='/usermanage/AddUser/'>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input oninput=\"OnInput(event)\" name=\"username\" type=\"text\"/></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp<input oninput=\"OnInput(event)\" name=\"password\" type=\"password\"/></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input id='username' name=\"username\" type=\"text\" maxlength='16'/>"
+    text = text + "&nbsp&nbsp<span id='CheckReU' style='color: red;'></span></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp"
+    text = text + "<input maxlength='16' id='password' name=\"password\" type=\"password\"/>"
+    text = text + "&nbsp&nbsp<span id='CheckReP' style='color: red;'></span></div>"
     text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select name='admin' type=\"text\"><option value=\"N\">N</option>"
     text = text + "<option value=\"Y\">Y</option></select></div>"
     text = text + "<br/><br/><div><hr/></div>"
 //onClick=\"subAddUser()\"
-    text = text + "<div><button>提交</button>&nbsp&nbsp&nbsp<button onClick=\"CleanAddUser()\">重置</button></div>"
+    text = text + "<div><button type=\"button\" onClick=\"subAddUser()\" >提交</button>&nbsp&nbsp&nbsp<button  type=\"button\" onClick=\"CleanAddUser()\">重置</button></div>"
     text = text + "</form>"
     text = text + "</div>"
     $("#openModal").html( text )

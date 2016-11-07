@@ -25,10 +25,18 @@ class connect_db:
 
     def Addtotable(self, table, value):
         try:
-            # raise Exception("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
-            #                   + table + ") + 1," + value + ")")
             self.conn.execute("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
                               + table + ") + 1," + value + ")")
+            self.conn.commit()
+            return 1
+        except:
+            return None
+
+    def ModUser(self, table, value, id):
+        try:
+            sql = "UPDATE " + table + " SET password='" + str(value['password']) + "',is_admin='" \
+                  + str(value['admin']) + "' where id='" + str(id) + "'"
+            self.conn.execute(sql)
             self.conn.commit()
             return 1
         except:

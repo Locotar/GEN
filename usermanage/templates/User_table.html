@@ -18,7 +18,7 @@
         <td>{{pass}}</td>
         <td>{{join_Time}}</td>
         <td>{{is_Admin}}</td>
-        <td><a href="javascript:ModUserInfo({{id}})">修改</a> | <a href="javascript:deleteUser({{id}})">删除</a></td>
+        <td><a href="javascript:ModUserInfo('{{id}}', '{{name}}')">修改</a> | <a href="javascript:deleteUser({{id}})">删除</a></td>
     </tr>
     {% endfor %}
 
