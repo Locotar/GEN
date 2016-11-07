@@ -184,7 +184,8 @@ $("#buttonUser").click(function() {
 // show jump div
 function ModUserInfo(userId){
     // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>用户信息</h2>"
+    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>修改信息</h2>"
+    // load user info
     text = text + "<p>" + userId + "</p></div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
@@ -200,7 +201,6 @@ function deleteUser(userId ){
 }
 
 function deleteUserSure(userId){
-//    alert(userId)
     window.location.href="#close"
     urltmp = "/usermanage/DelUser/?userid=" + userId
     $.ajax({url:urltmp,async:false});
@@ -208,19 +208,35 @@ function deleteUserSure(userId){
     $("#buttonUser").click()
 }
 
+
+//---add user---
+function subAddUser(){
+	$('#adduserform').submit()
+}
+function CleanAddUser() {
+	$("#username").value=""
+	$("#password").value=""
+}
+
+function OnInput(event){
+	alert('judge whether the user exist!')
+}
+
 function AddUser(){
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
-    text = text + "<form method = 'post' enctype=\"multipart/form-data\" action='/usermanage/AddUser/'>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input name=\"username\" type=\"text\"/></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp<input name=\"password\" type=\"password\"/></div>"
+    text = text + "<form id='adduserform' method = 'post' enctype=\"multipart/form-data\" action='/usermanage/AddUser/'>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input oninput=\"OnInput(event)\" name=\"username\" type=\"text\"/></div>"
+    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp<input oninput=\"OnInput(event)\" name=\"password\" type=\"password\"/></div>"
     text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select name='admin' type=\"text\"><option value=\"N\">N</option>"
     text = text + "<option value=\"Y\">Y</option></select></div>"
     text = text + "<br/><br/><div><hr/></div>"
-    text = text + "<div><button type=\"submit\" >提交</button>&nbsp&nbsp&nbsp<button id=\"reset\" type=\"button\">重置</button></div>"
-//    text = text + ""onClick=\"sub()\"
+//onClick=\"subAddUser()\"
+    text = text + "<div><button>提交</button>&nbsp&nbsp&nbsp<button onClick=\"CleanAddUser()\">重置</button></div>"
     text = text + "</form>"
     text = text + "</div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
 }
 
+
+//---add user end---
