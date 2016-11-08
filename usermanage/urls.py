@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^DelUser/$',views.DelUser,name = 'DelUser'),
     url(r'^CheckUser/$',views.CheckUser,name = 'CheckUser'),
     url(r'^ModUser/$',views.ModUser,name = 'ModUser'),
+    url(r'^ShowUserHTMLTemplate/$',views.ShowUserHTMLTemplate,name = 'ShowUserHTMLTemplate'),
 )

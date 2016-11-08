@@ -1,0 +1,23 @@
+<div>
+	<a href="#close" title="Close" class="close">X</a><h2>{{ info_dict.title }}</h2>
+	<form id="adduserform" method="post" enctype="multipart/form-data" {{info_dict.action }} ><br>
+		<div>
+			&nbsp;&nbsp;&nbsp;<label>用户名:</label>&nbsp;
+			<input id="username" name="username" value="{{ info_dict.username }}" {{ info_dict.username_disable }} type="text" maxlength="16">
+			&nbsp;&nbsp;<span id="CheckReU" style="color: red;"></span>
+		</div><br>
+		<div>
+			&nbsp;&nbsp;&nbsp;<label>密码:&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<input maxlength="16" id="password" name="password" type="password">
+			&nbsp;&nbsp;<span id="CheckReP" style="color: red;"></span>
+		</div><br>
+		<div>
+			&nbsp;&nbsp;&nbsp;<label>管理员:&nbsp;</label><select name="admin" type="text">
+			<option value="N">N</option><option value="Y">Y</option></select>
+		</div><br><br>
+		<div><hr></div>
+		<div>
+			<button type="button" onclick="{{ info_dict.fun }}">提交</button>&nbsp;&nbsp;&nbsp;<button type="button" onclick="CleanAddUser()">重置</button>
+		</div>
+	</form>
+</div>

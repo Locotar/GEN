@@ -207,23 +207,15 @@ function subModUser(userId){
     }
 }
 function ModUserInfo(userId, userName){
-    // get value from sql;
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>修改信息</h2>"
-    text = text + "<form id='adduserform' method = 'post' enctype=\"multipart/form-data\">"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp"
-    text = text + "<input id='username' name=\"username\" type=\"text\" disabled='true' value='" + userName + "' maxlength='16'/>"
-    text = text + "&nbsp&nbsp<span id='CheckReU' style='color: red;'></span></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp"
-    text = text + "<input id='password' name=\"password\" type=\"password\" maxlength='16'/>"
-    text = text + "&nbsp&nbsp<span id='CheckReP' style='color: red;'></span></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select name='admin' type=\"text\"><option value=\"N\">N</option>"
-    text = text + "<option value=\"Y\">Y</option></select></div>"
-    text = text + "<br/><br/><div><hr/></div>"
-//onClick=\"subAddUser()\"
-    text = text + "<div><button type=\"button\" onClick=\"subModUser('" + userId + "')\" >提交</button>&nbsp&nbsp&nbsp<button  type=\"button\" onClick=\"CleanAddUser()\">重置</button></div>"
-    text = text + "</form>"
-    text = text + "</div>"
-    $("#openModal").html( text )
+    $.ajax({
+            type: "POST",
+            url: "/usermanage/ShowUserHTMLTemplate/",
+            data: {'do': 'mod', 'userId': userId, 'userName': userName},
+            success: function(data){
+                $("#openModal").html( data )
+            }
+        }
+    );
     window.location.href="#openModal"
 }
 
@@ -277,21 +269,14 @@ function CleanAddUser() {
 	$("#CheckReU").empty();
 }
 function AddUser(){
-    var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>添加用户</h2>"
-    text = text + "<form id='adduserform' method = 'post' enctype=\"multipart/form-data\" action='/usermanage/AddUser/'>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>用户名:</label>&nbsp<input id='username' name=\"username\" type=\"text\" maxlength='16'/>"
-    text = text + "&nbsp&nbsp<span id='CheckReU' style='color: red;'></span></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>密码:&nbsp</label>&nbsp&nbsp&nbsp&nbsp"
-    text = text + "<input maxlength='16' id='password' name=\"password\" type=\"password\"/>"
-    text = text + "&nbsp&nbsp<span id='CheckReP' style='color: red;'></span></div>"
-    text = text + "<br/><div>&nbsp&nbsp&nbsp<label>管理员:&nbsp</label><select name='admin' type=\"text\"><option value=\"N\">N</option>"
-    text = text + "<option value=\"Y\">Y</option></select></div>"
-    text = text + "<br/><br/><div><hr/></div>"
-//onClick=\"subAddUser()\"
-    text = text + "<div><button type=\"button\" onClick=\"subAddUser()\" >提交</button>&nbsp&nbsp&nbsp<button  type=\"button\" onClick=\"CleanAddUser()\">重置</button></div>"
-    text = text + "</form>"
-    text = text + "</div>"
-    $("#openModal").html( text )
+    $.ajax({
+        type: "POST",
+        url: "/usermanage/ShowUserHTMLTemplate/",
+        data: {'do': 'add'},
+        success: function(data){
+            $("#openModal").html( data )
+        }
+    });
     window.location.href="#openModal"
 }
 

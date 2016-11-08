@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django import forms
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 # from django.template import Re/q/uestContext  HttpResponse ,, render_to_response
@@ -116,6 +117,15 @@ def ModUser(request):
         result = {'result': 'fail'}
         return JsonResponse(result)
 
-
-
+def ShowUserHTMLTemplate(request):
+    if request.is_ajax():
+        do = request.POST.get('do')
+        if do == 'add':
+            info_dict = {'title': 'Add User', 'fun': 'subAddUser()', 'action': "action=/usermanage/AddUser/"}
+        elif do == 'mod':
+            userid = request.POST.get('userId')
+            userName = request.POST.get('userName')
+            info_dict = {'title': 'Modify User','username': userName, 'username_disable': 'disabled=true', 'fun': "subModUser('" + str(userid) +"' )"}
+        html = render_to_string('userinfotmp.html', {'info_dict': info_dict} )
+        return HttpResponse(html)
 
