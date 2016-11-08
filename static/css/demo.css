@@ -1,37 +1,10 @@
 /* @import url(http://fonts.useso.com/css?family=Raleway:200,500,700,800); */
 
-@font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'codropsicons';
-	src:url('../fonts/codropsicons/codropsicons.eot');
-	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
-		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
-		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-}
 
-*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.input__field, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 .clearfix:before, .clearfix:after { content: ''; display: table; }
 .clearfix:after { clear: both; }
 
-body {
-	background: #f9f7f6;
-	color: #404d5b;
-	font-weight: 500;
-	font-size: 1.05em;
-	font-family: 'Raleway', Arial, sans-serif;
-}
-
-a {
-	color: #2fa0ec;
-	text-decoration: none;
-	outline: none;
-}
-
-a:hover, a:focus {
-	color: #74777b;
-}
 
 .container {
 	margin: 0 auto;
@@ -64,9 +37,6 @@ a:hover, a:focus {
 .bgcolor-7 { background: #d0d6d6; }
 .bgcolor-8 { background: #3d4444; color: #fff; }
 
-body .nomargin-bottom {
-	margin-bottom: 0;
-}
 
 /* Header */
 .codrops-header {

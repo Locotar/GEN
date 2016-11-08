@@ -245,8 +245,15 @@ function subAddUser(){
     var password = $("#password").val()
     if ('0' == username.length){
         $("#CheckReU").text('* Empty!')
+        if ('6' > password.length){
+            $("#CheckReP").text('* Num of pass less then 6')
+        }
+        else{
+            $("#CheckReP").empty();
+        }
     }
     else{
+        $("#CheckReU").empty();
         urltmp = "/usermanage/CheckUser/?username=" + username
         $.getJSON(urltmp, function(ret){
             if ('success' == ret['result']){
@@ -254,6 +261,8 @@ function subAddUser(){
                     $("#CheckReP").text('* Num of pass less then 6')
                 }
                 else{
+                    $("#CheckReP").empty();
+                    $("#CheckReU").empty();
                     $('#adduserform').submit()
                 }
             }

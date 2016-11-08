@@ -83,7 +83,7 @@
 
 .input__label--hideo {
 	position: absolute;
-	padding: 1.25em 0 0;
+	padding: 1.25em 1.25em 0;
 	width: 4em;
 	height: 100%;
 }
@@ -119,7 +119,7 @@
 }
 
 .input__field--hideo:focus {
-	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(10, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
 
