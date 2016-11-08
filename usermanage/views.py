@@ -2,11 +2,9 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django import forms
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-# from django.template import Re/q/uestContext  HttpResponse ,, render_to_response
 from login.models import User
 import time
 from main.SQlitDB import connect_db
-# from login.views import login
 import simplejson
 
 
@@ -24,12 +22,6 @@ def usermanage(request):
         # return login(request)
         return HttpResponseRedirect('/login/')
 
-class UserForm( forms.Form ):
-    username = forms.CharField(label='user:', max_length=100)
-    password = forms.CharField(label='pass:', widget=forms.PasswordInput())
-
-
-
 # button click
 def ShowUser(request):
     username = request.session.get('username')
@@ -44,7 +36,6 @@ def ShowUser(request):
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
-
 
 def AddUser(request):
     username = request.session.get('username')
@@ -105,11 +96,12 @@ def CheckUser(request):
 
 def ModUser(request):
     userid = request.GET.get('userid')
+    username = request.GET.get('username')
     password = request.GET.get('password')
     admin = request.GET.get('admin')
     conn = connect_db()
     value = {'password': password, 'admin': admin}
-    re = conn.ModUser('login_user', value, userid)
+    re = conn.ModUser('login_user', value, userid, username)
     if re:
         result = {'result': 'success'}
         return JsonResponse(result)
@@ -125,7 +117,8 @@ def ShowUserHTMLTemplate(request):
         elif do == 'mod':
             userid = request.POST.get('userId')
             userName = request.POST.get('userName')
-            info_dict = {'title': 'Modify User','username': userName, 'username_disable': 'disabled=true', 'fun': "subModUser('" + str(userid) +"' )"}
+            info_dict = {'title': 'Modify User','username': userName, 'username_disable': 'disabled=true'
+                , 'fun': "subModUser('" + str(userid) +"','" + userName + "' )"}
         html = render_to_string('userinfotmp.html', {'info_dict': info_dict} )
         return HttpResponse(html)
 

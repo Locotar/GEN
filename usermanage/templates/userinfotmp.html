@@ -1,14 +1,3 @@
-<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/component.css" />
-		<!--[if IE]>
-  		<!--<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
-		<![endif]-->
-</head>
 <div id="uform">
 	<a href="#close" title="Close" class="close">X</a><h2>{{ info_dict.title }}</h2>
 	<form id="adduserform" method="post" enctype="multipart/form-data" {{info_dict.action }} ><br>
@@ -17,7 +6,7 @@
 					   name="username" value="{{ info_dict.username }}"
 					   {{ info_dict.username_disable }} style="font-size: 135%" />
 				<label class="input__label input__label--hideo" for="username">
-					<i class="fa fa-fw fa-user icon icon--hideo"></i>
+				<i class="fa fa-fw fa-user icon icon--hideo"></i>
 				</label>
 		</span>
 		<span id="CheckReU" style="color: red;"></span>
@@ -25,7 +14,7 @@
 					<input class="input__field input__field--hideo" type="password" id="password"
 						   name="password" maxlength="16" style="font-size: 135%"/>
 					<label class="input__label input__label--hideo" for="password">
-						<i class="fa fa-fw fa-lock icon icon--hideo"></i>
+					<i class="fa fa-fw fa-lock icon icon--hideo"></i>
 					</label>
 			</span>
 			<span id="CheckReP" style="color: red;"></span>

@@ -32,12 +32,19 @@ class connect_db:
         except:
             return None
 
-    def ModUser(self, table, value, id):
+    def ModUser(self, table, value, id, username):
         try:
-            sql = "UPDATE " + table + " SET password='" + str(value['password']) + "',is_admin='" \
-                  + str(value['admin']) + "' where id='" + str(id) + "'"
-            self.conn.execute(sql)
-            self.conn.commit()
-            return 1
+            if id != 'None':
+                sql = "UPDATE " + table + " SET password='" + str(value['password']) + "',is_admin='" \
+                      + str(value['admin']) + "' where id='" + str(id) + "'"
+                self.conn.execute(sql)
+                self.conn.commit()
+                return 1
+            else:
+                sql = "UPDATE " + table + " SET password='" + str(value['password']) + "',is_admin='" \
+                      + str(value['admin']) + "' where username='" + str(username) + "'"
+                self.conn.execute(sql)
+                self.conn.commit()
+                return 1
         except:
             return None

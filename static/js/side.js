@@ -185,7 +185,7 @@ $("#buttonUser").click(function() {
 
 // Modify user
 
-function subModUser(userId){
+function subModUser(userId , userName){
     var password = $("#password").val()
     var admin = $("select[name='admin']").val()
     // ajax
@@ -193,7 +193,8 @@ function subModUser(userId){
         $("#CheckReP").text('* Num of pass less then 6')
     }
     else{
-        urltmp = "/usermanage/ModUser/?userid=" + userId + "&password=" + password + "&admin=" + admin
+        urltmp = "/usermanage/ModUser/?userid=" + userId + "&password=" + password
+        + "&admin=" + admin + "&username=" + userName
         $.getJSON(urltmp, function(ret){
             if ('success' == ret['result']){
                 window.location.href="#close"
