@@ -23,9 +23,9 @@ class connect_db:
         except:
             return None
 
-    def Addtotable(self, table, value):
+    def Addtotable(self, table, value, tableid='id'):
         try:
-            self.conn.execute("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
+            self.conn.execute("INSERT INTO " + table + " VALUES ((SELECT max(" + tableid + ") from "
                               + table + ") + 1," + value + ")")
             self.conn.commit()
             return 1
