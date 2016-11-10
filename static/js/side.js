@@ -167,6 +167,58 @@ $("#buttonEnv").click(function() {
     $("#showinfo").html(htmlobj.responseText);
 });
 
+function subAddEnv(){
+    var envname = $("#envname").val()
+    var envip = $("#ip").val()
+    var envuser = $("#user").val()
+    var envpass = $("#pass").val()
+    if ('0' == envname.length || '0' == envip.length || '0' == envuser.length
+    || '0' == envpass.length) {
+        if ('0' == envname.length){$("#envnameinfo").text('* Empty')}
+        if ('0' == envip.length){$("#envipinfo").text('* Empty')}
+        if ('0' == envuser.length){$("#rootUserinfo").text('* Empty')}
+        if ('0' == envpass.length){$("#rootPassinfo").text('* Empty')}
+    }
+    else{
+        urltmp = "/env/CheckEnv/?envip=" + envip
+        $.getJSON(urltmp, function(ret){
+            if ('notExist' == ret['result']){
+                $("#envnameinfo").empty();
+                $("#envipinfo").empty();
+                $("#rootUserinfo").empty();
+                $("#rootPassinfo").empty();
+                $('#envform').submit()
+            }
+            else{
+                $("#envipinfo").text('already exit!')
+            }
+        })
+    }
+}
+
+function CleanAddEnv() {
+        $('#envform')[0].reset();
+        $("#envnameinfo").empty();
+        $("#envipinfo").empty();
+        $("#rootUserinfo").empty();
+        $("#rootPassinfo").empty();
+}
+function AddEnv(){
+    $.ajax({
+        type: "POST",
+        url: "/env/ShowEnvHTMLTemplate/",
+        data: {'do': 'add'},
+        success: function(data){
+            $("#openModal").html( data )
+        }
+    });
+    window.location.href="#openModal"
+}
+
+
+
+
+
 
 
 
