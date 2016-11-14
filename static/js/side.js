@@ -121,6 +121,16 @@ function getleftbar(obj){
 
 // ++++ ENV
 // do something at load
+
+// click the flash Env button
+$("#buttonEnv").click(function() {
+    var mydate = new Date();
+    var timeNow=mydate.toLocaleString();
+    $("#showCurrentTime").html(timeNow)
+    // ajax
+    var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
+    $("#showinfo").html(htmlobj.responseText);
+});
 $(function(){
     var mydate = new Date();
     var timeNow=mydate.toLocaleString();
@@ -144,9 +154,17 @@ function showenvInfo(envId){
 function deleteEnv(envId ){
     // get value from sql;
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
-    text = text + "<p> 确定要删除么？</p></div>"
+    text = text + "<p> 确定要删除么？</p>"
+    text = text + "<button onclick=\"deleteEnvSure(" + envId + ")\"> ok</button></div>"
     $("#openModal").html( text )
     window.location.href="#openModal"
+}
+
+function deleteEnvSure(envId){
+    window.location.href="#close"
+    urltmp = "/env/DelEnv/?envid=" + envId
+    $.ajax({url:urltmp,async:false});
+    $("#buttonEnv").click()
 }
 
 function RstartEnv(envId ){
@@ -158,14 +176,14 @@ function RstartEnv(envId ){
 }
 
 // click the flash Env button
-$("#buttonEnv").click(function() {
-    var mydate = new Date();
-    var timeNow=mydate.toLocaleString();
-    $("#showCurrentTime").html(timeNow)
+// $("#buttonEnv").click(function() {
+//     var mydate = new Date();
+//     var timeNow=mydate.toLocaleString();
+//     $("#showCurrentTime").html(timeNow)
     // ajax
-    var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
-    $("#showinfo").html(htmlobj.responseText);
-});
+//     var htmlobj=$.ajax({url:"/getEnvFromDB/",async:false});
+//     $("#showinfo").html(htmlobj.responseText);
+// });
 
 function subAddEnv(){
     var envname = $("#envname").val()

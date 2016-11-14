@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse , HttpResponseRedirect, JsonResponse
 from main.SQlitDB import connect_db
 import time
+import simplejson
 
 def __unicode__(self):
    return unicode(self.some_field) or u''
@@ -25,15 +26,17 @@ def AddEnv(request):
     if request.method == 'POST':
         envname = request.POST.get('envname')
         envip = request.POST.get('ip')
-        envuser = request.POST.get('user')
+        envuser = request.POST.get('username')
         envpass = request.POST.get('pass')
         # if envmodule not N will use module to init it
         envmodule = request.POST.get('envmodule')
 
         conn = connect_db()
-        jointime = time.strftime("%Y-%m-%d-%H:%M:%S")
-        value = "'" + envname + "','" + envip + "','" + envuser + "','" + envpass + "','" + jointime + "'"
-        raise Exception(value)
+        # jointime = time.strftime("%Y-%m-%d-%H:%M:%S").decode('GBK').encode('utf-8') + "'"
+        value = "'" + envname + "','" + envip + "','" + envuser + "','" + envpass + "','" \
+               + time.strftime("%Y-%m-%d %H:%M:%S") + "','None','None','None','None','None','None','None'"
+        
+        # raise Exception(value)
         addflag = conn.Addtotable('env', value)
         if addflag:
             # add success
@@ -71,3 +74,20 @@ def ShowEnvHTMLTemplate(request):
                 , 'fun': "subModUser('" + str(userid) +"','" + userName + "' )"}
         html = render_to_string('envinfotmp.html', {'info_dict': info_dict} )
         return HttpResponse(html)
+
+def DelEnv(request):
+    username = request.session.get('username')
+    if username:
+        envid = request.GET.get('envid')
+        try:
+            conn = connect_db()
+            value = conn.selectfromtable('env', envid)
+            if value:
+                conn.deletefromtable('env', envid)
+                result = simplejson.dumps('success')
+                return HttpResponse(result, mimetype='application/javascript')
+        # raise Exception(value.fetchall())
+        except:
+            return HttpResponseRedirect('/login/')
+    else:
+        return HttpResponseRedirect('/login/')

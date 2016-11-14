@@ -23,10 +23,15 @@ class connect_db:
         except:
             return None
 
-    def Addtotable(self, table, value):
+    def Addtotable(self, table, value, tableid='id'):
         try:
-            self.conn.execute("INSERT INTO " + table + " VALUES ((SELECT max(id) from "
-                              + table + ") + 1," + value + ")")
+            sql = "INSERT INTO " + table + " VALUES ((SELECT max(" + tableid + ") from " \
+                  + table + ") + 1," + value + ")"
+            try:
+                self.conn.execute(sql)
+            except:
+                sql = "INSERT INTO " + table + " VALUES ( '1'," + value + ")"
+                self.conn.execute(sql)
             self.conn.commit()
             return 1
         except:
