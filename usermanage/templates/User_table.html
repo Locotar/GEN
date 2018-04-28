@@ -6,16 +6,16 @@
     <tr>
         <th>用户编号</th>
         <th>用户名称</th>
-        <th>用户密码</th>
+        <!--<th>用户密码</th>-->
         <th>添加时间</th>
-        <th>管理员么</th>
+        <th>管理员</th>
         <th>操作节点</th>
     </tr>
     {% for id , name , pass , is_Admin , join_Time in Userdict %}
     <tr>
         <td>{{id}}</td>
         <td>{{name}}</td>
-        <td>{{pass}}</td>
+        <!--<td>{{pass}}</td>-->
         <td>{{join_Time}}</td>
         <td>{{is_Admin}}</td>
         <td><a href="javascript:ModUserInfo('{{id}}', '{{name}}')">修改</a> | <a href="javascript:deleteUser({{id}})">删除</a></td>

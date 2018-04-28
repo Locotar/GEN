@@ -8,7 +8,7 @@ class connect_db:
         except:
             pass
 
-    def selectfromtable(self , table , key = '*'):
+    def selectfromtable(self, table, key='*'):
         try:
             cursor = self.conn.execute("SELECT " + key + " from " + table)
             return cursor
@@ -46,8 +46,9 @@ class connect_db:
                 self.conn.commit()
                 return 1
             else:
-                sql = "UPDATE " + table + " SET password='" + str(value['password']) + "',is_admin='" \
-                      + str(value['admin']) + "' where username='" + str(username) + "'"
+                sql = "UPDATE " + table + " SET password='" + \
+                      str(value['password']) + "' where username='" + \
+                      str(username) + "'"
                 self.conn.execute(sql)
                 self.conn.commit()
                 return 1

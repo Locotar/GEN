@@ -29,9 +29,9 @@ def ShowUser(request):
     username = request.session.get('username')
     if username:
         conn = connect_db()
-        value = conn.selectfromtable('login_user' )
+        value = conn.selectfromtable('login_user')
         if value:
-            return render( request ,'User_table.html' , {'Userdict':value})
+            return render(request, 'User_table.html', {'Userdict': value})
         else:
             # show error msg
             return HttpResponseRedirect('/login/')
@@ -117,15 +117,44 @@ def ModUser(request):
 
 
 def ShowUserHTMLTemplate(request):
-    if request.is_ajax():
-        do = request.POST.get('do')
-        if do == 'add':
-            info_dict = {'title': 'Add User', 'fun': 'subAddUser()', 'action': "action=/usermanage/AddUser/"}
-        elif do == 'mod':
-            userid = request.POST.get('userId')
-            userName = request.POST.get('userName')
-            info_dict = {'title': 'Modify User', 'username': userName, 'username_disable': 'disabled=true',
-                         'fun': "subModUser('" + str(userid) + "','" + userName + "' )"}
-        html = render_to_string('userinfotmp.html', {'info_dict': info_dict})
-        return HttpResponse(html)
+    Susername = request.session.get('username')
+    if Susername:
+        tmp = User.objects.filter(username__exact=Susername)
+        if request.is_ajax():
+            do = request.POST.get('do')
+            if tmp[0].is_Admin == 'Y':
+                if do == 'add':
+                    info_dict = {'title': 'Add User', 'fun': 'subAddUser()', 'action': "action=/usermanage/AddUser/"}
+                    html = render_to_string('userinfotmp.html', {'info_dict': info_dict})
+                    return HttpResponse(html)
+                elif do == 'mod':
+                    userid = request.POST.get('userId')
+                    userName = request.POST.get('userName')
+                    info_dict = {'title': 'Modify User', 'username': userName, 'username_disable': 'disabled=true',
+                                 'fun': "subModUser('" + str(userid) + "','" + userName + "' )"}
+                    html = render_to_string('userinfotmp.html', {'info_dict': info_dict})
+                    return HttpResponse(html)
+                elif do == 'del':
+                    userid = request.POST.get('userId')
+                    info_dict = {'title': 'Delete',
+                                 'info': 'Delete',
+                                 'fun': "subdeleteUser('" + str(userid) + " ')"}
+                    html = render_to_string('Warning.html', {'info_dict': info_dict})
+                    return HttpResponse(html)
+            else:
+                if do == 'mod':
+                    userid = request.POST.get('userId')
+                    userName = request.POST.get('userName')
+                    if Susername == userName:
+                        info_dict = {'title': 'Modify User', 'username': userName, 'username_disable': 'disabled=true',
+                                     'fun': "subModUser('" + str(userid) + "','" + userName + "' )"}
+                        html = render_to_string('userinfotmp.html', {'info_dict': info_dict})
+                        return HttpResponse(html)
+                info_dict = {'info': 'You have no permission to do this.', 'title': 'Warning',
+                             'fun': 'ClosePopup()'}
+                html = render_to_string('Warning.html', {'info_dict': info_dict})
+                return HttpResponse(html)
 
+            # return HttpResponseRedirect('/login/')
+    else:
+        return HttpResponseRedirect('/login/')

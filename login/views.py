@@ -11,7 +11,7 @@ class UserForm(forms.Form):
     password = forms.CharField(label='pass:', widget=forms.PasswordInput())
 
 
-def login(req ):
+def login(req):
     username = req.session.get('username')
     if username:
         return HttpResponseRedirect('/env/')

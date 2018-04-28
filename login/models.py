@@ -10,6 +10,8 @@ from django.contrib import admin
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    is_Admin = models.CharField(max_length=50)
+    # password = models.CharField(max_length=50)
 
 
 class UserAdmin(admin.ModelAdmin):

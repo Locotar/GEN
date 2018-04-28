@@ -234,7 +234,9 @@ function AddEnv(){
 }
 
 
-
+function ClosePopup(){
+    window.location.href="#close"
+}
 
 
 
@@ -290,12 +292,26 @@ function ModUserInfo(userId, userName){
     window.location.href="#openModal"
 }
 
-function deleteUser(userId ){
-    // get value from sql;
+
+function subdeleteUser(userId ){
+//    get value from sql;
     var text="<div><a href=\"#close\" title=\"Close\" class=\"close\">X</a><h2>确定删除</h2>"
     text = text + "<br/><p> 确定要删除么？</p><br/><br/>"
     text = text + "<button onclick=\"deleteUserSure(" + userId + ")\"> ok</button></div>"
     $("#openModal").html( text )
+    window.location.href="#openModal"
+
+}
+function deleteUser(userId ){
+    $.ajax({
+            type: "POST",
+            url: "/usermanage/ShowUserHTMLTemplate/",
+            data: {'do': 'del', 'userId': userId},
+            success: function(data){
+                $("#openModal").html( data )
+            }
+        }
+    );
     window.location.href="#openModal"
 }
 
