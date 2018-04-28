@@ -7,8 +7,9 @@ from django import forms
 
 
 class UserForm(forms.Form):
-    username = forms.CharField(label='user:',max_length=16)
-    password = forms.CharField(label='pass:',widget=forms.PasswordInput())
+    username = forms.CharField(label='user:', max_length=16)
+    password = forms.CharField(label='pass:', widget=forms.PasswordInput())
+
 
 def login(req ):
     username = req.session.get('username')
@@ -20,7 +21,7 @@ def login(req ):
             if uf.is_valid():
                 username = uf.cleaned_data['username']
                 password = uf.cleaned_data['password']
-                user = User.objects.filter(username__exact = username,password__exact = password)
+                user = User.objects.filter(username__exact=username, password__exact=password)
                 if user:
                     # write to session
                     req.session['username'] = username
@@ -33,9 +34,10 @@ def login(req ):
         regist =req.GET.get('regist')
         if regist:
             # return render_to_response('login.html', context_instance=RequestContext(req))
-            return render_to_response('login.html',{'uf':uf , 'regist':'success'} , context_instance=RequestContext(req))
+            return render_to_response('login.html', {'uf': uf, 'regist': 'success'}, context_instance=RequestContext(req))
         else:
-            return render_to_response('login.html',{'uf':uf} , context_instance=RequestContext(req))
+            return render_to_response('login.html', {'uf': uf}, context_instance=RequestContext(req))
+
 
 def regist(request):
     if request.method == 'POST':
@@ -57,13 +59,16 @@ def regist(request):
                 return HttpResponseRedirect('/login/?regist=success' )
     else:
         uf = UserForm()
-    return render_to_response('regist.html',{'uf':uf}, context_instance=RequestContext(request))
+    return render_to_response('regist.html', {'uf': uf}, context_instance=RequestContext(request))
 
+
+# login
 def index(req):
-    username = req.COOKIES.get('username','')
-    return render_to_response('index.html' ,{'username':username})
+    username = req.COOKIES.get('username', '')
+    return render_to_response('index.html', {'username': username})
 
 
+# logout
 def logout(request):
     del request.session['username']
     return HttpResponseRedirect('/login/')

@@ -10,6 +10,7 @@ import simplejson
 
 def usermanage(request):
     username = request.session.get('username')
+    # username = 'test'
     if username:
         conn = connect_db()
         value = conn.selectfromtable('login_user' )
@@ -21,6 +22,7 @@ def usermanage(request):
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
+
 
 # button click
 def ShowUser(request):
@@ -36,6 +38,7 @@ def ShowUser(request):
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
+
 
 def AddUser(request):
     username = request.session.get('username')
@@ -65,6 +68,7 @@ def AddUser(request):
         # return login(request)
         return HttpResponseRedirect('/login/')
 
+
 def DelUser(request):
     username = request.session.get('username')
     if username:
@@ -84,15 +88,17 @@ def DelUser(request):
     else:
         return HttpResponseRedirect('/login/')
 
+
 def CheckUser(request):
     username = request.GET.get('username')
     userexist = User.objects.filter(username__exact=username)
     if userexist:
-        result = {'result':'fail'}
+        result = {'result': 'fail'}
         return JsonResponse(result)
     else:
-        result = {'result':'success'}
+        result = {'result': 'success'}
         return JsonResponse(result)
+
 
 def ModUser(request):
     userid = request.GET.get('userid')
@@ -109,6 +115,7 @@ def ModUser(request):
         result = {'result': 'fail'}
         return JsonResponse(result)
 
+
 def ShowUserHTMLTemplate(request):
     if request.is_ajax():
         do = request.POST.get('do')
@@ -117,8 +124,8 @@ def ShowUserHTMLTemplate(request):
         elif do == 'mod':
             userid = request.POST.get('userId')
             userName = request.POST.get('userName')
-            info_dict = {'title': 'Modify User','username': userName, 'username_disable': 'disabled=true'
-                , 'fun': "subModUser('" + str(userid) +"','" + userName + "' )"}
-        html = render_to_string('userinfotmp.html', {'info_dict': info_dict} )
+            info_dict = {'title': 'Modify User', 'username': userName, 'username_disable': 'disabled=true',
+                         'fun': "subModUser('" + str(userid) + "','" + userName + "' )"}
+        html = render_to_string('userinfotmp.html', {'info_dict': info_dict})
         return HttpResponse(html)
 

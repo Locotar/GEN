@@ -9,7 +9,7 @@ def getEnvFromDB(request):
         conn = connect_db()
         value = conn.selectfromtable('env', 'id,name,ip,jointime,lock,status')
         if value:
-            return render( request ,'env_table.html', {'dict':value})
+            return render(request, 'env_table.html', {'dict': value})
         else:
             # show error msg
             return HttpResponseRedirect('/login/')
