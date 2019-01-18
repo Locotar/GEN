@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^usermanage/', include('usermanage.urls')),
 
     url(r'^getEnvFromDB/', include('getEnvFromDB.urls')),
+    url(r'^reportServer/', include('reportServer.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
     # css js image  -> folder

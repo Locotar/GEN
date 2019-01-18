@@ -1,9 +1,10 @@
-#encoding : utf-8
+# encoding : utf-8
 from django.shortcuts import render , render_to_response
 from django.http import HttpResponse , HttpResponseRedirect
 from django.template import RequestContext
 from login.models import User
 from django import forms
+from main.SQlitDB import connect_db
 
 
 class UserForm(forms.Form):
@@ -25,6 +26,12 @@ def login(req):
                 if user:
                     # write to session
                     req.session['username'] = username
+
+                    conn = connect_db()
+                    where = "username='" + username + "'"
+                    isAdmin = conn.selectfromtable('login_user', 'is_Admin', where)
+                    isAdmin = isAdmin.fetchall()
+                    req.session['isAdmin'] = isAdmin[0][0]
                     return HttpResponseRedirect('/env/')
                 else:
                     return HttpResponseRedirect('/login/')

@@ -10,12 +10,14 @@ import simplejson
 
 def usermanage(request):
     username = request.session.get('username')
+    isAdmin = request.session.get('isAdmin')
     # username = 'test'
     if username:
         conn = connect_db()
-        value = conn.selectfromtable('login_user' )
+        value = conn.selectfromtable('login_user')
         if value:
-            return render(request, 'usermanage.html', {'username': username,  'active': 'user', 'Userdict': value})
+            return render(request, 'usermanage.html', {'username': username,  'active': 'user',
+                                                       'Userdict': value, 'isAdmin': isAdmin})
         else:
             # show error msg
             return HttpResponseRedirect('/login/')

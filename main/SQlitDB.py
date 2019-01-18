@@ -8,16 +8,20 @@ class connect_db:
         except:
             pass
 
-    def selectfromtable(self, table, key='*'):
+    def selectfromtable(self, table, key='*', where=None):
         try:
-            cursor = self.conn.execute("SELECT " + key + " from " + table)
+            if where:
+                print 'where: ', where
+                cursor = self.conn.execute("SELECT " + key + " from " + table + " where " + where)
+            else:
+                cursor = self.conn.execute("SELECT " + key + " from " + table)
             return cursor
         except:
             return None
 
-    def deletefromtable(self, table, keyid = None):
+    def deletefromtable(self, table, keyid=None):
         try:
-            cursor = self.conn.execute("DELETE FROM " + table + " WHERE ID=" + keyid )
+            cursor = self.conn.execute("DELETE FROM " + table + " WHERE ID=" + keyid)
             self.conn.commit()
             return cursor
         except:
@@ -29,6 +33,7 @@ class connect_db:
                   + table + ") + 1," + value + ")"
             try:
                 self.conn.execute(sql)
+                print 'sql ', sql
             except:
                 sql = "INSERT INTO " + table + " VALUES ( '1'," + value + ")"
                 self.conn.execute(sql)

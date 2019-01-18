@@ -5,22 +5,25 @@ from main.SQlitDB import connect_db
 import time
 import simplejson
 
+
 def __unicode__(self):
    return unicode(self.some_field) or u''
 
-def env(request ):
+
+def env(request):
     username = request.session.get('username')
     if username:
         conn = connect_db()
         value = conn.selectfromtable('env', 'id,name,ip,jointime,lock,status')
         if value:
-            return render( request ,'env.html' , {'username': username,'active': 'env' , 'dict':value})
+            return render(request, 'env.html', {'username': username, 'active': 'env', 'dict': value})
         else:
             # show error msg
             return HttpResponseRedirect('/login/')
     else:
         # return login(request)
         return HttpResponseRedirect('/login/')
+
 
 def AddEnv(request):
     if request.method == 'POST':
@@ -45,6 +48,7 @@ def AddEnv(request):
             # add fail
             return HttpResponseRedirect('/login/')
 
+
 def CheckEnv(request):
     envip = request.GET.get('envip')
     conn = connect_db()
@@ -60,6 +64,7 @@ def CheckEnv(request):
         result = {'result': 'notExist'}
         return JsonResponse(result)
 
+
 def ShowEnvHTMLTemplate(request):
     if request.is_ajax():
         do = request.POST.get('do')
@@ -74,6 +79,7 @@ def ShowEnvHTMLTemplate(request):
                 , 'fun': "subModUser('" + str(userid) +"','" + userName + "' )"}
         html = render_to_string('envinfotmp.html', {'info_dict': info_dict} )
         return HttpResponse(html)
+
 
 def DelEnv(request):
     username = request.session.get('username')

@@ -6,7 +6,7 @@ import sqlite3
 conn = sqlite3.connect('db.sqlite3')
 print "Opened database successfully";
 
-conn.execute('''CREATE TABLE ENV
+conn.execute('''CREATE TABLE IF NOT EXISTS ENV
        (ID INT PRIMARY KEY     NOT NULL,
        NAME            TEXT    NOT NULL,
        IP              TEXT    NOT NULL,
@@ -23,7 +23,7 @@ conn.execute('''CREATE TABLE ENV
        );''')
 print "ENV Table created successfully";
 
-conn.execute('''CREATE TABLE JOB
+conn.execute('''CREATE TABLE IF NOT EXISTS JOB
        (JOBID INT PRIMARY KEY     NOT NULL,
        JOBNAME            TEXT    NOT NULL,
        STARTTIME          TEXT,

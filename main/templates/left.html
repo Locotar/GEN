@@ -38,6 +38,12 @@
         <a href="" title="创建任务">创建任务</a>
     </dd>
     {% endifequal %}
+	
+    {% ifequal active 'reportServer' %}
+    <dd style="display: block;">
+        <a href="" title="日志管理">日志管理</a>
+    </dd>
+    {% endifequal %}
 
     {% ifequal active 'user' %}
     <dd style="display: block;">
